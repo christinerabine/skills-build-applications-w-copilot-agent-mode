@@ -12,24 +12,16 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from django.urls import path, include
 
-import os
 @api_view(['GET'])
 def api_root(request, format=None):
-    codespace_name = os.environ.get('CODESPACE_NAME', None)
-    if codespace_name:
-        base_url = f"https://{codespace_name}-8000.app.github.dev/api/"
-    else:
-        # fallback for localhost
-        base_url = "/api/"
     return Response({
-        'users': f'{base_url}users/',
-        'teams': f'{base_url}teams/',
-        'activities': f'{base_url}activities/',
-        'workouts': f'{base_url}workouts/',
-        'leaderboard': f'{base_url}leaderboard/',
+        'users': '/api/users/',
+        'teams': '/api/teams/',
+        'activities': '/api/activities/',
+        'workouts': '/api/workouts/',
+        'leaderboard': '/api/leaderboard/',
     })
 
 urlpatterns = [
-    path('', api_root, name='api_root'),
-    path('api/', include(router.urls)),
+    path('', include(router.urls)),
 ]
