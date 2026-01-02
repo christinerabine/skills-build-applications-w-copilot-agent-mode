@@ -1,5 +1,6 @@
 from djongo import models
 from django.contrib.auth.models import AbstractUser
+from django.core.validators import MinValueValidator
 
 class User(AbstractUser):
     # Additional fields can be added here
@@ -32,7 +33,7 @@ class ClubActivity(models.Model):
     name = models.CharField(max_length=100)
     description = models.TextField()
     schedule = models.CharField(max_length=100)
-    max_attendance = models.IntegerField()
+    max_attendance = models.IntegerField(validators=[MinValueValidator(1)])
     class Meta:
         verbose_name = 'Club Activity'
         verbose_name_plural = 'Club Activities'

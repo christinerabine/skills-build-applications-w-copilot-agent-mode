@@ -52,3 +52,14 @@ class ClubActivityTests(APITestCase):
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
         self.assertEqual(response.data['name'], 'Manga Maniacs')
+    
+    def test_club_activity_max_attendance_validation(self):
+        url = reverse('clubactivity-list')
+        data = {
+            'name': 'Test Club',
+            'description': 'Test description',
+            'schedule': 'Mondays at 6pm',
+            'max_attendance': 0  # Invalid: should be at least 1
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_400_BAD_REQUEST)
