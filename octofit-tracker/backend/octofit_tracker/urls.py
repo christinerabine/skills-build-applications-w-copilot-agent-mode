@@ -34,6 +34,7 @@ def api_root(request, format=None):
         'activities': f'{base_url}/api/activities/',
         'workouts': f'{base_url}/api/workouts/',
         'leaderboard': f'{base_url}/api/leaderboard/',
+        'club-activities': f'{base_url}/api/club-activities/',
     })
 
 urlpatterns = [

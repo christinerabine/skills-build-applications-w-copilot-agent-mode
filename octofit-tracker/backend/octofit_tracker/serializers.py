@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import User, Team, Activity, Workout, LeaderboardEntry
+from .models import User, Team, Activity, Workout, LeaderboardEntry, ClubActivity
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -25,3 +25,8 @@ class LeaderboardEntrySerializer(serializers.ModelSerializer):
     class Meta:
         model = LeaderboardEntry
         fields = ['id', 'user', 'score', 'team']
+
+class ClubActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ClubActivity
+        fields = ['id', 'name', 'description', 'schedule', 'max_attendance']

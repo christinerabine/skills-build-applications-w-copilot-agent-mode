@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const Activities = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/activities/`;
+  const endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/club-activities/`;
 
   useEffect(() => {
     console.log('Fetching from:', endpoint);
@@ -35,6 +35,8 @@ const Activities = () => {
                 <th>#</th>
                 <th>Name</th>
                 <th>Description</th>
+                <th>Schedule</th>
+                <th>Max Attendance</th>
               </tr>
             </thead>
             <tbody>
@@ -43,6 +45,8 @@ const Activities = () => {
                   <td>{activity.id || idx + 1}</td>
                   <td>{activity.name || '-'}</td>
                   <td>{activity.description || '-'}</td>
+                  <td>{activity.schedule || '-'}</td>
+                  <td>{activity.max_attendance || '-'}</td>
                 </tr>
               ))}
             </tbody>

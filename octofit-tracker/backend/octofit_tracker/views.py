@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import User, Team, Activity, Workout, LeaderboardEntry
-from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, WorkoutSerializer, LeaderboardEntrySerializer
+from .models import User, Team, Activity, Workout, LeaderboardEntry, ClubActivity
+from .serializers import UserSerializer, TeamSerializer, ActivitySerializer, WorkoutSerializer, LeaderboardEntrySerializer, ClubActivitySerializer
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -21,3 +21,7 @@ class WorkoutViewSet(viewsets.ModelViewSet):
 class LeaderboardEntryViewSet(viewsets.ModelViewSet):
     queryset = LeaderboardEntry.objects.all().order_by('-score')
     serializer_class = LeaderboardEntrySerializer
+
+class ClubActivityViewSet(viewsets.ModelViewSet):
+    queryset = ClubActivity.objects.all()
+    serializer_class = ClubActivitySerializer

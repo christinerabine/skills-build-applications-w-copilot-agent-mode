@@ -1,7 +1,7 @@
 from django.urls import reverse
 from rest_framework import status
 from rest_framework.test import APITestCase
-from .models import User, Team, Activity, Workout, LeaderboardEntry
+from .models import User, Team, Activity, Workout, LeaderboardEntry, ClubActivity
 
 class UserTests(APITestCase):
     def test_create_user(self):
@@ -39,3 +39,16 @@ class LeaderboardEntryTests(APITestCase):
         data = {'user': user.id, 'score': 100}
         response = self.client.post(url, data, format='json')
         self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+
+class ClubActivityTests(APITestCase):
+    def test_create_club_activity(self):
+        url = reverse('clubactivity-list')
+        data = {
+            'name': 'Manga Maniacs',
+            'description': 'Explore the fantastic stories of the most interesting characters from Japanese Manga (graphic novels).',
+            'schedule': 'Tuesdays at 7pm',
+            'max_attendance': 15
+        }
+        response = self.client.post(url, data, format='json')
+        self.assertEqual(response.status_code, status.HTTP_201_CREATED)
+        self.assertEqual(response.data['name'], 'Manga Maniacs')

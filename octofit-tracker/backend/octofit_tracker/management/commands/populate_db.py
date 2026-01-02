@@ -30,7 +30,15 @@ def get_sample_data():
         {"name": "Super Strength", "description": "Heavy lifting and power moves"},
         {"name": "Endurance", "description": "Long distance running and stamina"},
     ]
-    return users, teams, activities, leaderboard, workouts
+    club_activities = [
+        {
+            "name": "Manga Maniacs",
+            "description": "Explore the fantastic stories of the most interesting characters from Japanese Manga (graphic novels).",
+            "schedule": "Tuesdays at 7pm",
+            "max_attendance": 15
+        },
+    ]
+    return users, teams, activities, leaderboard, workouts, club_activities
 
 class Command(BaseCommand):
     help = 'Populate the octofit_db database with test data'
@@ -39,7 +47,7 @@ class Command(BaseCommand):
         client = MongoClient('localhost', 27017)
         db = client['octofit_db']
 
-        users, teams, activities, leaderboard, workouts = get_sample_data()
+        users, teams, activities, leaderboard, workouts, club_activities = get_sample_data()
 
         # Drop existing collections
         db.users.drop()
@@ -47,6 +55,7 @@ class Command(BaseCommand):
         db.activities.drop()
         db.leaderboard.drop()
         db.workouts.drop()
+        db.club_activities.drop()
 
         # Insert sample data
         db.users.insert_many(users)
@@ -54,6 +63,7 @@ class Command(BaseCommand):
         db.activities.insert_many(activities)
         db.leaderboard.insert_many(leaderboard)
         db.workouts.insert_many(workouts)
+        db.club_activities.insert_many(club_activities)
 
         # Ensure unique index on email for users
         db.users.create_index([("email", ASCENDING)], unique=True)

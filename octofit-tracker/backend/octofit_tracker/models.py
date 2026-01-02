@@ -27,3 +27,12 @@ class LeaderboardEntry(models.Model):
     class Meta:
         verbose_name = 'Leaderboard Entry'
         verbose_name_plural = 'Leaderboard Entries'
+
+class ClubActivity(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField()
+    schedule = models.CharField(max_length=100)
+    max_attendance = models.IntegerField()
+    class Meta:
+        verbose_name = 'Club Activity'
+        verbose_name_plural = 'Club Activities'
