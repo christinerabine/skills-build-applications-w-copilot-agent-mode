@@ -4,7 +4,10 @@ import React, { useEffect, useState } from 'react';
 const Activities = () => {
   const [activities, setActivities] = useState([]);
   const [loading, setLoading] = useState(true);
-  const endpoint = `https://${process.env.REACT_APP_CODESPACE_NAME}-8000.app.github.dev/api/club-activities/`;
+  const codespace = process.env.REACT_APP_CODESPACE_NAME;
+  const endpoint = codespace 
+    ? `https://${codespace}-8000.app.github.dev/api/club-activities/`
+    : 'http://localhost:8000/api/club-activities/';
 
   useEffect(() => {
     console.log('Fetching from:', endpoint);
